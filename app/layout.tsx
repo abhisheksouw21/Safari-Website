@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Lato } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -37,6 +38,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
       <body className="font-mono antialiased">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXX');
+          `}
+        </Script>
         {children}
         <Analytics />
       </body>
