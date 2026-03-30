@@ -4,6 +4,8 @@ import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
 import './globals.css'
 
+const GA_MEASUREMENT_ID = 'G-DKP889YQHR'
+
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
@@ -39,7 +41,7 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
       <body className="font-mono antialiased">
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -47,7 +49,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXX');
+            gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
         {children}
